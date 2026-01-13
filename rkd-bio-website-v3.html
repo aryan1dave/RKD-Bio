@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RKD Bio — Engineering the Future of Equine Excellence</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --color-bg: #0a0a0a;
+            --color-bg-elevated: #111111;
+            --color-bg-card: #1a1a1a;
+            --color-text: #f5f5f5;
+            --color-text-secondary: #a0a0a0;
+            --color-text-muted: #666666;
+            --color-accent: #c9a962;
+            --color-accent-hover: #dfc07a;
+            --color-accent-dark: #a08840;
+            --color-green: #4a7c59;
+            --color-green-light: #5d9970;
+            --color-border: #252525;
+            --color-border-light: #333333;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Spectral', serif;
+            --max-width: 1400px;
+            --section-padding: 120px;
+            --section-padding-mobile: 64px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.6s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+
+        .loader-logo span {
+            color: var(--color-accent);
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--color-border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--color-accent);
+            animation: loading 1.5s ease forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: clamp(3rem, 8vw, 5.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            color: var(--color-text-secondary);
+            max-width: 65ch;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 24px; }
+        }
+
+        section {
+            padding: var(--section-padding) 0;
+        }
+
+        @media (max-width: 768px) {
+            section { padding: var(--section-padding-mobile) 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: all var(--transition-medium);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--color-bg);
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            transition: color var(--transition-medium);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-medium);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-cta {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 12px 28px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+        }
+
+        .nav-cta:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+        }
+
+        @media (max-width: 968px) {
+            .nav-links, .nav-cta { display: none; }
+            .mobile-toggle { display: flex; }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 48px 48px;
+            transform: translateX(100%);
+            transition: transform var(--transition-medium);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .mobile-menu-links a {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-text);
+            transition: color var(--transition-medium);
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .mobile-menu-cta {
+            margin-top: auto;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 20px 36px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-radius: 50px;
+            text-align: center;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            display: none;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.4) 0%,
+                rgba(10, 10, 10, 0.6) 50%,
+                rgba(10, 10, 10, 1) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--color-accent);
+        }
+
+        .hero h1 {
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        @media (max-width: 640px) {
+            .hero-ctas {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero-ctas .btn-primary,
+            .hero-ctas .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .btn-primary {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 16px 36px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-text);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        .scroll-indicator span {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--color-accent), transparent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(0.8); }
+        }
+
+        /* Client Logos */
+        .clients {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .clients-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .clients-header p {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            max-width: none;
+        }
+
+        .clients-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 64px;
+            flex-wrap: wrap;
+        }
+
+        .client-logo {
+            opacity: 0.4;
+            transition: opacity var(--transition-medium);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--color-text);
+        }
+
+        .client-logo:hover {
+            opacity: 0.8;
+        }
+
+        /* Statement Section */
+        .statement {
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .statement-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .statement-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        .statement-label {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+        }
+
+        .statement-text h2 {
+            margin-bottom: 32px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .statement-text p {
+            font-size: 1.125rem;
+            line-height: 1.9;
+        }
+
+        @media (max-width: 968px) {
+            .statement-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* Services - Arup-style dramatic carousel */
+        .services {
+            background: var(--color-bg);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .services-header {
+            padding: var(--section-padding) 0 60px;
+            background: var(--color-bg-elevated);
+        }
+
+        .services-carousel {
+            position: relative;
+            background: var(--color-bg);
+        }
+
+        .services-carousel-track {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+
+        .services-carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .services-carousel-track.dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
+        }
+
+        .services-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .service-slide {
+            flex: 0 0 calc(33.333% - 3px);
+            min-width: 400px;
+            height: 70vh;
+            min-height: 500px;
+            max-height: 700px;
+            position: relative;
+            scroll-snap-align: start;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1200px) {
+            .service-slide {
+                flex: 0 0 calc(50% - 2px);
+                min-width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-slide {
+                flex: 0 0 85%;
+                min-width: 300px;
+                height: 60vh;
+            }
+        }
+
+        .service-slide-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .service-slide-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .service-slide:hover .service-slide-bg img {
+            transform: scale(1.05);
+        }
+
+        .service-slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(10, 10, 10, 0.95) 0%,
+                rgba(10, 10, 10, 0.4) 40%,
+                rgba(10, 10, 10, 0.1) 100%
+            );
+            transition: background 0.4s ease;
+        }
+
+        .service-slide:hover .service-slide-overlay {
+            background: linear-gradient(
+                to top,
+                rgba(10, 10, 10, 0.98) 0%,
+                rgba(10, 10, 10, 0.5) 50%,
+                rgba(10, 10, 10, 0.2) 100%
+            );
+        }
+
+        .service-slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 48px 40px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .service-slide:hover .service-slide-content {
+            transform: translateY(0);
+        }
+
+        .service-slide-number {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-slide-number::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-accent);
+            opacity: 0.3;
+        }
+
+        .service-slide-content h3 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .service-slide-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .service-slide:hover .service-slide-content p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-slide-link {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.15s;
+        }
+
+        .service-slide:hover .service-slide-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-slide-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .service-slide-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Services scroll indicator */
+        .services-scroll-hint {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 32px 0;
+            background: var(--color-bg);
+        }
+
+        .services-scroll-hint span {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .hint-mobile {
+            display: none;
+        }
+
+        /* Hide arrows on mobile, show swipe text */
+        @media (max-width: 768px) {
+            .scroll-arrows {
+                display: none;
+            }
+            .hint-desktop {
+                display: none;
+            }
+            .hint-mobile {
+                display: block;
+            }
+        }
+
+        .scroll-arrows {
+            display: flex;
+            gap: 8px;
+        }
+
+        .scroll-arrow {
+            width: 40px;
+            height: 40px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--color-text-secondary);
+        }
+
+        .scroll-arrow:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        /* Section header - reusable */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .section-header h2 {
+            max-width: 600px;
+        }
+
+        .section-link {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap var(--transition-medium);
+        }
+
+        .section-link:hover {
+            gap: 16px;
+        }
+
+        /* Vision */
+        .vision {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 968px) {
+            .vision-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+
+        .vision-content .eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-green-light);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .vision-content .eyebrow::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--color-green-light);
+        }
+
+        .vision-content h2 {
+            margin-bottom: 32px;
+        }
+
+        .vision-content p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .vision-image {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .vision-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .vision-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            transform: translate(20px, 20px);
+            z-index: -1;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+            color: var(--color-bg);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            position: relative;
+        }
+
+        @media (max-width: 968px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .stat-item h3 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(10, 10, 10, 0.6);
+            max-width: none;
+        }
+
+        /* Values - Clean 2x2 grid */
+        .values {
+            background: var(--color-bg-elevated);
+        }
+
+        .values-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+            align-items: end;
+        }
+
+        @media (max-width: 968px) {
+            .values-header {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-bottom: 60px;
+            }
+        }
+
+        .values-header .eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+        }
+
+        .values-header p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--color-border);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .values-grid {
+                display: none;
+            }
+        }
+
+        /* Mobile values horizontal scroll */
+        .values-scroll {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .values-scroll {
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 16px;
+                margin: 0 -24px;
+                padding-left: 24px;
+                padding-right: 24px;
+                cursor: grab;
+            }
+
+            .values-scroll:active {
+                cursor: grabbing;
+            }
+
+            .values-scroll::-webkit-scrollbar {
+                display: none;
+            }
+
+            .values-scroll .value-cell {
+                flex: 0 0 85%;
+                min-width: 280px;
+                scroll-snap-align: start;
+                border-radius: 8px;
+                border: 1px solid var(--color-border);
+            }
+
+            .values-swipe-hint {
+                display: flex;
+                justify-content: center;
+                padding-top: 16px;
+            }
+
+            .values-swipe-hint span {
+                font-family: var(--font-display);
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--color-text-muted);
+            }
+        }
+
+        .values-swipe-hint {
+            display: none;
+        }
+
+        .value-cell {
+            background: var(--color-bg-card);
+            padding: 48px;
+            transition: all var(--transition-medium);
+        }
+
+        .value-cell:hover {
+            background: var(--color-bg-elevated);
+        }
+
+        .value-number {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .value-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+
+        /* Team - Editorial style */
+        .team {
+            background: var(--color-bg);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        @media (max-width: 968px) {
+            .team-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                display: none;
+            }
+        }
+
+        /* Mobile team horizontal scroll */
+        .team-scroll {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .team-scroll {
+                display: flex;
+                gap: 24px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 16px;
+                margin: 0 -24px;
+                padding-left: 24px;
+                padding-right: 24px;
+                cursor: grab;
+            }
+
+            .team-scroll:active {
+                cursor: grabbing;
+            }
+
+            .team-scroll::-webkit-scrollbar {
+                display: none;
+            }
+
+            .team-scroll .team-member {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+            }
+
+            .team-swipe-hint {
+                display: flex;
+                justify-content: center;
+                padding-top: 16px;
+            }
+
+            .team-swipe-hint span {
+                font-family: var(--font-display);
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--color-text-muted);
+            }
+        }
+
+        .team-swipe-hint {
+            display: none;
+        }
+
+        .team-member {
+            cursor: pointer;
+        }
+
+        .team-member-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            margin-bottom: 24px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .team-member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .team-member:hover .team-member-image img {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .team-member-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(10, 10, 10, 0.4) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .team-member:hover .team-member-image::after {
+            opacity: 1;
+        }
+
+        .team-member-social {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .team-member:hover .team-member-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-member-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg);
+            transition: all 0.3s ease;
+        }
+
+        .team-member-social a:hover {
+            background: var(--color-accent);
+            transform: scale(1.1);
+        }
+
+        .team-member-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .team-member-info .role {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .team-member-info p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+        }
+
+        /* Work CTA - Gold card */
+        .work-cta {
+            background: var(--color-bg-elevated);
+        }
+
+        .work-cta-card {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #b8954d 100%);
+            border-radius: 12px;
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .work-cta-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .work-cta-card {
+                grid-template-columns: 1fr;
+                padding: 48px 32px;
+                text-align: center;
+            }
+        }
+
+        .work-cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .work-cta-content .eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(10, 10, 10, 0.6);
+            margin-bottom: 16px;
+        }
+
+        .work-cta-content h2 {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--color-bg);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .work-cta-content p {
+            font-size: 1.1rem;
+            color: rgba(10, 10, 10, 0.7);
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .work-cta-content p {
+                margin: 0 auto;
+            }
+        }
+
+        .work-cta-action {
+            position: relative;
+            z-index: 1;
+        }
+
+        .work-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-bg);
+            background: rgba(10, 10, 10, 0.9);
+            padding: 20px 40px;
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+            white-space: nowrap;
+        }
+
+        .work-cta-btn:hover {
+            background: var(--color-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .work-cta-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .work-cta-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--color-bg);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .testimonial-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--color-text);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 6rem;
+            color: var(--color-accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-info h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .testimonial-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Future */
+        .future {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .future-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .future-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .future-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(10, 10, 10, 0.95) 0%,
+                rgba(10, 10, 10, 0.7) 50%,
+                rgba(10, 10, 10, 0.4) 100%
+            );
+        }
+
+        @media (max-width: 768px) {
+            .future-bg::after {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(10, 10, 10, 0.7) 0%,
+                    rgba(10, 10, 10, 0.85) 100%
+                );
+            }
+            .future-content p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .future-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .future-content .eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-green-light);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .future-content .eyebrow::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--color-green-light);
+        }
+
+        .future-content h2 {
+            margin-bottom: 32px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        .future-content p {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            margin-bottom: 48px;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+
+        .contact-info .eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 24px;
+        }
+
+        .contact-info > p {
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-accent);
+        }
+
+        .contact-item-content h4 {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-item-content p {
+            color: var(--color-text);
+            font-size: 1.1rem;
+        }
+
+        .contact-item-content a {
+            color: var(--color-accent);
+            transition: color var(--transition-medium);
+        }
+
+        .contact-item-content a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        .contact-form {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 48px;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 32px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 48px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 18px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .contact-form button:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-bg);
+            border-top: 1px solid var(--color-border);
+            padding: 80px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+
+        @media (max-width: 968px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 48px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 24px;
+        }
+
+        .footer-brand > p {
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-medium);
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .footer-links h4 {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            transition: color var(--transition-medium);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children .fade-up:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-children .fade-up:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-children .fade-up:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-children .fade-up:nth-child(4) { transition-delay: 0.4s; }
+        .stagger-children .fade-up:nth-child(5) { transition-delay: 0.5s; }
+        .stagger-children .fade-up:nth-child(6) { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-mark">
+                    <i data-lucide="leaf"></i>
+                </div>
+                RKD<span>BIO</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="#contact" class="nav-cta">Get in Touch</a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" id="mobileClose">
+            <i data-lucide="x"></i>
+        </button>
+        <ul class="mobile-menu-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="mobile-menu-cta">Get in Touch</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg">
+            <!-- High-quality agricultural imagery - green field/grass -->
+            <video class="hero-video" autoplay muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-wheat-field-gently-moved-by-the-wind-at-sunset-2527-large.mp4" type="video/mp4">
+            </video>
+            <!-- Fallback: Golden wheat/agricultural field -->
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80" alt="Golden agricultural field at sunset">
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-eyebrow">End-to-End Equine Solutions</p>
+                <h1>Engineering the Future of Equine Excellence</h1>
+                <p>We design, build, and deliver integrated solutions for world-class equestrian facilities. From advanced fodder systems to complete facility infrastructure — one partner, total capability.</p>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn-primary">
+                        Request Consultation
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="#services" class="btn-secondary">Explore Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Client Logos -->
+    <section class="clients">
+        <div class="container">
+            <div class="clients-header fade-up">
+                <p>Trusted by Leading Equestrian Organizations</p>
+            </div>
+            <div class="clients-grid fade-up">
+                <div class="client-logo">ROYAL STABLES</div>
+                <div class="client-logo">AL SHAQAB</div>
+                <div class="client-logo">MEYDAN</div>
+                <div class="client-logo">DIRIYAH GATE</div>
+                <div class="client-logo">NEOM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statement -->
+    <section class="statement">
+        <div class="container">
+            <div class="statement-content fade-up">
+                <p class="statement-label">Our Approach</p>
+                <div class="statement-text">
+                    <h2>How can we reimagine equine care for a sustainable future?</h2>
+                    <p>The equestrian industry stands at a crossroads. Climate pressures, water scarcity, and rising feed costs demand new thinking. We believe the answer lies at the intersection of agricultural innovation and operational excellence — creating systems that are better for horses, better for business, and better for the planet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="services-header">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Integrated solutions for<br>complete equine excellence</h2>
+                    <a href="#" class="section-link">
+                        View all services
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="services-carousel">
+            <div class="services-carousel-track" id="servicesCarousel">
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80" alt="Hydroponic fodder systems">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">01</span>
+                        <h3>Fodder Systems</h3>
+                        <p>Controlled environment hydroponic systems producing fresh, nutritious fodder year-round with 95% less water than traditional methods.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore fodder solutions
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="Premium facility equipment">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">02</span>
+                        <h3>Facility Equipment</h3>
+                        <p>Premium stabling, arena surfaces, watering systems and infrastructure designed for elite performance and animal welfare.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore equipment
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80" alt="Smart technology solutions">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">03</span>
+                        <h3>Technology</h3>
+                        <p>IoT monitoring, automated feeding systems, and data platforms for optimized operations and real-time insights.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore technology
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80" alt="Strategic consulting">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">04</span>
+                        <h3>Consulting</h3>
+                        <p>Strategic advisory from facility planning through operational optimization, sustainability audits and performance analysis.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore consulting
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80" alt="Project delivery">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">05</span>
+                        <h3>Project Delivery</h3>
+                        <p>End-to-end project management from concept through commissioning with single-point accountability and quality assurance.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore delivery
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-slide fade-up">
+                    <div class="service-slide-bg">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80" alt="Supply chain management">
+                    </div>
+                    <div class="service-slide-overlay"></div>
+                    <div class="service-slide-content">
+                        <span class="service-slide-number">06</span>
+                        <h3>Supply Chain</h3>
+                        <p>Sourcing, logistics, and procurement services ensuring quality equipment and materials delivered on schedule globally.</p>
+                        <a href="#" class="service-slide-link">
+                            Explore supply chain
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-scroll-hint">
+            <span class="hint-desktop">Drag to explore</span>
+            <span class="hint-mobile">Swipe to explore →</span>
+            <div class="scroll-arrows">
+                <button class="scroll-arrow" onclick="scrollServices(-1)">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="scroll-arrow" onclick="scrollServices(1)">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="vision" id="vision">
+        <div class="container">
+            <div class="vision-grid">
+                <div class="vision-content fade-up">
+                    <p class="eyebrow">Our Vision</p>
+                    <h2>Pioneering sustainable agriculture for equine nutrition</h2>
+                    <p>Traditional hay production consumes vast quantities of water and land while remaining vulnerable to drought, disease, and supply chain disruptions. Our hydroponic fodder systems represent a fundamental shift — growing nutrient-dense feed in controlled environments with a fraction of the resources.</p>
+                    <p>The result is consistent, traceable nutrition that enhances performance while dramatically reducing environmental impact. It's not just better farming — it's farming for a future where resources are precious and excellence is expected.</p>
+                    <a href="#" class="btn-primary">
+                        Learn More
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+                <div class="vision-image fade-up">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80" alt="Sustainable farming">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-up">
+                    <h3>95%</h3>
+                    <p>Water Reduction</p>
+                </div>
+                <div class="stat-item fade-up">
+                    <h3>5</h3>
+                    <p>Day Grow Cycle</p>
+                </div>
+                <div class="stat-item fade-up">
+                    <h3>40+</h3>
+                    <p>Installations</p>
+                </div>
+                <div class="stat-item fade-up">
+                    <h3>12</h3>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values" id="values">
+        <div class="container">
+            <div class="values-header fade-up">
+                <div>
+                    <p class="eyebrow">Our Values</p>
+                    <h2>Built on principles that matter</h2>
+                </div>
+                <p>Our culture shapes everything we do — from how we design systems to how we partner with clients. These aren't just words; they're the standards we hold ourselves to every day.</p>
+            </div>
+            
+            <!-- Desktop 2x2 grid -->
+            <div class="values-grid fade-up">
+                <div class="value-cell">
+                    <span class="value-number">01</span>
+                    <h3 class="value-title">Sustainability First</h3>
+                    <p class="value-description">Every solution we design considers its environmental footprint. We're not just meeting today's needs — we're protecting tomorrow's resources through regenerative thinking.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">02</span>
+                    <h3 class="value-title">Science-Led Innovation</h3>
+                    <p class="value-description">We ground our work in research and data. From nutritional analysis to system optimization, evidence drives our decisions — not assumptions.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">03</span>
+                    <h3 class="value-title">Partnership Mindset</h3>
+                    <p class="value-description">We succeed when our clients succeed. That means deep collaboration, knowledge transfer, and long-term thinking. We're not vendors — we're partners.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">04</span>
+                    <h3 class="value-title">Excellence Without Compromise</h3>
+                    <p class="value-description">We hold ourselves to the highest standards in every detail — because in equine care, excellence isn't optional. It's the baseline.</p>
+                </div>
+            </div>
+
+            <!-- Mobile horizontal scroll -->
+            <div class="values-scroll">
+                <div class="value-cell">
+                    <span class="value-number">01</span>
+                    <h3 class="value-title">Sustainability First</h3>
+                    <p class="value-description">Every solution we design considers its environmental footprint. We're not just meeting today's needs — we're protecting tomorrow's resources through regenerative thinking.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">02</span>
+                    <h3 class="value-title">Science-Led Innovation</h3>
+                    <p class="value-description">We ground our work in research and data. From nutritional analysis to system optimization, evidence drives our decisions — not assumptions.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">03</span>
+                    <h3 class="value-title">Partnership Mindset</h3>
+                    <p class="value-description">We succeed when our clients succeed. That means deep collaboration, knowledge transfer, and long-term thinking. We're not vendors — we're partners.</p>
+                </div>
+
+                <div class="value-cell">
+                    <span class="value-number">04</span>
+                    <h3 class="value-title">Excellence Without Compromise</h3>
+                    <p class="value-description">We hold ourselves to the highest standards in every detail — because in equine care, excellence isn't optional. It's the baseline.</p>
+                </div>
+            </div>
+            <div class="values-swipe-hint">
+                <span>Swipe to see more →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Meet our leadership</h2>
+                <a href="#" class="section-link">
+                    View full team
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+            
+            <!-- Desktop grid -->
+            <div class="team-grid">
+                <div class="team-member fade-up">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Richard Davies">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Richard Davies</h3>
+                        <span class="role">Founder & Managing Director</span>
+                        <p>20+ years in equine facility development across the GCC region.</p>
+                    </div>
+                </div>
+
+                <div class="team-member fade-up">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Sarah Al-Rashid">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Sarah Al-Rashid</h3>
+                        <span class="role">Director of Operations</span>
+                        <p>Agricultural engineer specializing in controlled environment systems.</p>
+                    </div>
+                </div>
+
+                <div class="team-member fade-up">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" alt="Dr. James Mitchell">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Dr. James Mitchell</h3>
+                        <span class="role">Head of Nutrition Science</span>
+                        <p>PhD in equine nutrition from RVC London. Published researcher.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile horizontal scroll -->
+            <div class="team-scroll">
+                <div class="team-member">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Richard Davies">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Richard Davies</h3>
+                        <span class="role">Founder & Managing Director</span>
+                        <p>20+ years in equine facility development across the GCC region.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Sarah Al-Rashid">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Sarah Al-Rashid</h3>
+                        <span class="role">Director of Operations</span>
+                        <p>Agricultural engineer specializing in controlled environment systems.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-member-image">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" alt="Dr. James Mitchell">
+                        <div class="team-member-social">
+                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Dr. James Mitchell</h3>
+                        <span class="role">Head of Nutrition Science</span>
+                        <p>PhD in equine nutrition from RVC London. Published researcher.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-swipe-hint">
+                <span>Swipe to see more →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work CTA -->
+    <section class="work-cta" id="projects">
+        <div class="container">
+            <div class="work-cta-card fade-up">
+                <div class="work-cta-content">
+                    <p class="eyebrow">Our Work</p>
+                    <h2>Want to see what we've built?</h2>
+                    <p>From royal stables to commercial breeding facilities, we've delivered projects across the GCC. Let's discuss how we can help with yours.</p>
+                </div>
+                <div class="work-cta-action">
+                    <a href="#contact" class="work-cta-btn">
+                        Get in touch
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-content fade-up">
+                <p class="testimonial-quote">RKD Bio transformed our approach to equine nutrition. The fodder system has reduced our water consumption by 90% while our horses have never been healthier. Their team's expertise and commitment to our success has been exceptional.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Client">
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Sheikh Mohammed Al-Fahad</h4>
+                        <p>Director, Royal Equestrian Club Dubai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future -->
+    <section class="future">
+        <div class="future-bg">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80" alt="Future of farming">
+        </div>
+        <div class="container">
+            <div class="future-content fade-up">
+                <p class="eyebrow">The Future of Farming</p>
+                <h2>Agriculture is being reinvented. We're helping lead the way.</h2>
+                <p>By 2050, global food demand will increase by 70% while arable land continues to shrink. Controlled environment agriculture isn't an alternative — it's a necessity. Our work in equine nutrition is pioneering systems that will reshape how we think about sustainable food production across species and sectors.</p>
+                <a href="#contact" class="btn-primary">
+                    Partner With Us
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <p class="eyebrow">Get in Touch</p>
+                    <h2>Let's discuss your project</h2>
+                    <p>Whether you're planning a new facility, upgrading existing operations, or exploring sustainable nutrition solutions — we're here to help. Our team responds within 24 hours.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>Location</h4>
+                                <p>Dubai, United Arab Emirates</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@rkdbio.com">info@rkdbio.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div class="contact-item-content">
+                                <h4>WhatsApp</h4>
+                                <p><a href="#">+971 XX XXX XXXX</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-up">
+                    <h3>Request a consultation</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Smith">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="john@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Organization</label>
+                            <input type="text" placeholder="Company or facility name">
+                        </div>
+                        <div class="form-group">
+                            <label>Area of Interest</label>
+                            <select>
+                                <option value="">Select a service</option>
+                                <option value="fodder">Fodder Systems</option>
+                                <option value="equipment">Facility Equipment</option>
+                                <option value="technology">Technology Solutions</option>
+                                <option value="consulting">Consulting Services</option>
+                                <option value="project">Project Delivery</option>
+                                <option value="supply">Supply Chain</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your project or requirements..."></textarea>
+                        </div>
+                        <button type="submit">
+                            Send Request
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-mark">
+                            <i data-lucide="leaf"></i>
+                        </div>
+                        RKD<span>BIO</span>
+                    </div>
+                    <p>Engineering the future of equine excellence through integrated solutions and sustainable innovation.</p>
+                    <div class="footer-social">
+                        <a href="#"><i data-lucide="linkedin"></i></a>
+                        <a href="#"><i data-lucide="twitter"></i></a>
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Fodder Systems</a></li>
+                        <li><a href="#">Facility Equipment</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Consulting</a></li>
+                        <li><a href="#">Project Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Insights</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">WhatsApp</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 RKD Bio. All rights reserved.</p>
+                <p>Privacy Policy · Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/971XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Initialize Lucide icons (with error handling)
+        try {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        } catch(e) {}
+
+        // ===== DRAG TO SCROLL FUNCTIONALITY =====
+        function enableDragScroll(element) {
+            if (!element) return;
+            
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            element.addEventListener('mousedown', (e) => {
+                isDown = true;
+                element.classList.add('dragging');
+                startX = e.pageX - element.offsetLeft;
+                scrollLeft = element.scrollLeft;
+                element.style.cursor = 'grabbing';
+            });
+
+            element.addEventListener('mouseleave', () => {
+                isDown = false;
+                element.classList.remove('dragging');
+                element.style.cursor = 'grab';
+            });
+
+            element.addEventListener('mouseup', () => {
+                isDown = false;
+                element.classList.remove('dragging');
+                element.style.cursor = 'grab';
+            });
+
+            element.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - element.offsetLeft;
+                const walk = (x - startX) * 2;
+                element.scrollLeft = scrollLeft - walk;
+            });
+
+            // Set initial cursor
+            element.style.cursor = 'grab';
+        }
+
+        // Apply drag scroll to all horizontal scrollable elements
+        const servicesCarousel = document.getElementById('servicesCarousel');
+        const teamScroll = document.querySelector('.team-scroll');
+        const valuesScroll = document.querySelector('.values-scroll');
+
+        enableDragScroll(servicesCarousel);
+        enableDragScroll(teamScroll);
+        enableDragScroll(valuesScroll);
+
+        // Services carousel scroll buttons
+        function scrollServices(direction) {
+            const carousel = document.getElementById('servicesCarousel');
+            if (carousel) {
+                const slideWidth = carousel.querySelector('.service-slide').offsetWidth + 4;
+                carousel.scrollBy({
+                    left: slideWidth * direction,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (mobileClose && mobileMenu) {
+            mobileClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Fade up on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Video fallback
+        const heroVideo = document.querySelector('.hero-video');
+        const heroImage = document.querySelector('.hero-bg img');
+        
+        if (heroVideo) {
+            heroVideo.addEventListener('error', () => {
+                heroVideo.style.display = 'none';
+                if (heroImage) heroImage.style.display = 'block';
+            });
+        }
+    </script>
+
+</body>
+</html>
