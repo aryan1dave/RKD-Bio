@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RKD Bio — Engineering the Future of Equine Excellence</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="RKD Bio designs and delivers integrated solutions for world-class equestrian facilities. Advanced hydroponic fodder systems, specialist equine equipment, and complete facility infrastructure.">
+    <meta name="keywords" content="hydroponic fodder systems, equine equipment, horse feed systems, equestrian facilities, fodder cube, UAE equine solutions, horse nutrition, sustainable agriculture">
+    <meta name="author" content="RKD Bio">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rkdbio.com">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rkdbio.com">
+    <meta property="og:title" content="RKD Bio — Engineering the Future of Equine Excellence">
+    <meta property="og:description" content="Integrated solutions for world-class equestrian facilities. Advanced fodder systems, specialist equipment, and complete infrastructure.">
+    <meta property="og:image" content="https://rkdbio.com/rkdlogo.png">
+    <meta property="og:site_name" content="RKD Bio">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RKD Bio — Engineering the Future of Equine Excellence">
+    <meta name="twitter:description" content="Integrated solutions for world-class equestrian facilities.">
+    <meta name="twitter:image" content="https://rkdbio.com/rkdlogo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/rkdsymbol.png">
+    <link rel="apple-touch-icon" href="/rkdsymbol.png">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,16 +105,10 @@
             text-align: center;
         }
 
-        .loader-logo {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+        .loader-logo-img {
+            height: 50px;
+            width: auto;
             margin-bottom: 24px;
-        }
-
-        .loader-logo span {
-            color: var(--color-accent);
         }
 
         .loader-bar {
@@ -179,29 +198,19 @@
         }
 
         .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
             display: flex;
             align-items: center;
-            gap: 12px;
         }
 
-        .logo-mark {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: var(--color-bg);
+        .logo-img {
+            height: 36px;
+            width: auto;
         }
 
-        .logo span {
-            color: var(--color-accent);
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 28px;
+            }
         }
 
         .nav-links {
@@ -506,6 +515,12 @@
             opacity: 0;
             animation: fadeIn 1s ease forwards;
             animation-delay: 1.2s;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-indicator {
+                display: none;
+            }
         }
 
         .scroll-indicator span {
@@ -943,27 +958,142 @@
             line-height: 1.9;
         }
 
+        .vision-image-wrapper {
+            position: relative;
+        }
+
         .vision-image {
             position: relative;
-            aspect-ratio: 4/5;
-            border-radius: 4px;
+            border-radius: 16px;
             overflow: hidden;
         }
 
         .vision-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
         }
 
-        .vision-image::before {
+        /* Accent frame decoration */
+        .vision-image::after {
             content: '';
             position: absolute;
-            inset: 0;
-            border: 1px solid var(--color-accent);
-            border-radius: 4px;
-            transform: translate(20px, 20px);
-            z-index: -1;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        /* Gold corner accents */
+        .vision-accent {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--color-accent);
+            pointer-events: none;
+        }
+
+        .vision-accent.top-right {
+            top: -16px;
+            right: -16px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 16px 0 0;
+        }
+
+        .vision-accent.bottom-left {
+            bottom: -16px;
+            left: -16px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 16px;
+        }
+
+        /* Floating stat badge */
+        .vision-badge {
+            position: absolute;
+            bottom: 24px;
+            left: -32px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            padding: 20px 28px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .vision-badge h4 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .vision-badge span {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 968px) {
+            .vision-image-wrapper {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .vision-accent.top-right {
+                top: -12px;
+                right: -12px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .vision-accent.bottom-left {
+                bottom: -12px;
+                left: -12px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .vision-badge {
+                left: auto;
+                right: -16px;
+                bottom: -16px;
+                padding: 16px 20px;
+            }
+            
+            .vision-badge h4 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vision-accent {
+                display: none;
+            }
+            
+            .vision-badge {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                margin-top: 16px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                padding: 16px 24px;
+            }
+            
+            .vision-badge h4 {
+                margin-bottom: 0;
+            }
         }
 
         /* Stats */
@@ -1424,8 +1554,8 @@
             font-family: var(--font-display);
             font-size: 1rem;
             font-weight: 600;
-            color: var(--color-bg);
-            background: rgba(10, 10, 10, 0.9);
+            color: var(--color-accent);
+            background: var(--color-bg);
             padding: 20px 40px;
             border-radius: 50px;
             transition: all var(--transition-medium);
@@ -1433,7 +1563,7 @@
         }
 
         .work-cta-btn:hover {
-            background: var(--color-bg);
+            background: #111;
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
@@ -1556,10 +1686,77 @@
             }
         }
 
-        .future-content {
+        .future-content-wrapper {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+        }
+
+        .future-content {
+            position: relative;
+            max-width: 700px;
+            padding: 48px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Gold corner accents for future content */
+        .future-accent {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--color-accent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .future-accent.top-left {
+            top: -16px;
+            left: -16px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 16px 0 0 0;
+        }
+
+        .future-accent.bottom-right {
+            bottom: -16px;
+            right: -16px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 16px 0;
+        }
+
+        @media (max-width: 768px) {
+            .future-content {
+                padding: 32px 24px;
+            }
+            
+            .future-accent {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .future-accent.top-left {
+                top: -12px;
+                left: -12px;
+            }
+            
+            .future-accent.bottom-right {
+                bottom: -12px;
+                right: -12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .future-accent {
+                display: none;
+            }
+            
+            .future-content {
+                border: 1px solid rgba(201, 169, 98, 0.2);
+            }
         }
 
         .future-content .eyebrow {
@@ -1584,13 +1781,13 @@
 
         .future-content h2 {
             margin-bottom: 32px;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 4vw, 3rem);
         }
 
         .future-content p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             line-height: 1.9;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
 
         /* Contact */
@@ -1773,6 +1970,59 @@
             transform: translateY(-2px);
         }
 
+        /* Form Success State */
+        .form-success {
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .form-success .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .form-success .success-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--color-bg);
+        }
+
+        .form-success h3 {
+            font-size: 1.5rem;
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+
+        .form-success p {
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            max-width: none;
+        }
+
+        .form-success button {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border: none;
+            padding: 16px 32px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+        }
+
+        .form-success button:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         footer {
             background: var(--color-bg);
@@ -1800,6 +2050,11 @@
 
         .footer-brand .logo {
             margin-bottom: 24px;
+        }
+
+        .footer-logo-img {
+            height: 32px;
+            width: auto;
         }
 
         .footer-brand > p {
@@ -1940,20 +2195,26 @@
 </head>
 <body>
 
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <img src="/rkdsymbol.png" alt="RKD Bio" class="loader-logo-img">
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <a href="#" class="logo">
-                <div class="logo-mark">
-                    <i data-lucide="leaf"></i>
-                </div>
-                RKD<span>BIO</span>
+                <img src="/rkdlogo.png" alt="RKD Bio" class="logo-img">
             </a>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#vision">Vision</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#team">Team</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-right">
@@ -1974,7 +2235,6 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#vision">Vision</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#team">Team</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <a href="#contact" class="mobile-menu-cta">Get in Touch</a>
@@ -1983,12 +2243,12 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg">
-            <!-- High-quality agricultural imagery - green field/grass -->
-            <video class="hero-video" autoplay muted loop playsinline preload="none" poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-wheat-field-gently-moved-by-the-wind-at-sunset-2527-large.mp4" type="video/mp4">
+            <!-- Aerial countryside/farm view -->
+            <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-farm-in-the-countryside-4741-large.mp4" type="video/mp4">
             </video>
-            <!-- Fallback: Golden wheat/agricultural field -->
-            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80" alt="Golden agricultural field at sunset">
+            <!-- Fallback image -->
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Aerial view of countryside farm">
         </div>
         <div class="container">
             <div class="hero-content">
@@ -2045,10 +2305,6 @@
             <div class="container">
                 <div class="section-header fade-up">
                     <h2>Integrated solutions for<br>complete equine excellence</h2>
-                    <a href="#" class="section-link">
-                        View all services
-                        <i data-lucide="arrow-right"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -2064,8 +2320,8 @@
                         <span class="service-slide-number">01</span>
                         <h3>Fodder Systems</h3>
                         <p>Controlled environment hydroponic systems producing fresh, nutritious fodder year-round with 95% less water than traditional methods.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore fodder solutions
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2080,8 +2336,8 @@
                         <span class="service-slide-number">02</span>
                         <h3>Facility Equipment</h3>
                         <p>Premium stabling, arena surfaces, watering systems and infrastructure designed for elite performance and animal welfare.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore equipment
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2096,8 +2352,8 @@
                         <span class="service-slide-number">03</span>
                         <h3>Technology</h3>
                         <p>IoT monitoring, automated feeding systems, and data platforms for optimized operations and real-time insights.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore technology
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2112,8 +2368,8 @@
                         <span class="service-slide-number">04</span>
                         <h3>Consulting</h3>
                         <p>Strategic advisory from facility planning through operational optimization, sustainability audits and performance analysis.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore consulting
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2128,8 +2384,8 @@
                         <span class="service-slide-number">05</span>
                         <h3>Project Delivery</h3>
                         <p>End-to-end project management from concept through commissioning with single-point accountability and quality assurance.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore delivery
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2144,8 +2400,8 @@
                         <span class="service-slide-number">06</span>
                         <h3>Supply Chain</h3>
                         <p>Sourcing, logistics, and procurement services ensuring quality equipment and materials delivered on schedule globally.</p>
-                        <a href="#" class="service-slide-link">
-                            Explore supply chain
+                        <a href="#contact" class="service-slide-link">
+                            Get in touch
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -2176,13 +2432,21 @@
                     <h2>Pioneering sustainable agriculture for equine nutrition</h2>
                     <p>Traditional hay production consumes vast quantities of water and land while remaining vulnerable to drought, disease, and supply chain disruptions. Our hydroponic fodder systems represent a fundamental shift — growing nutrient-dense feed in controlled environments with a fraction of the resources.</p>
                     <p>The result is consistent, traceable nutrition that enhances performance while dramatically reducing environmental impact. It's not just better farming — it's farming for a future where resources are precious and excellence is expected.</p>
-                    <a href="#" class="btn-primary">
-                        Learn More
+                    <a href="#contact" class="btn-primary">
+                        Get in Touch
                         <i data-lucide="arrow-right"></i>
                     </a>
                 </div>
-                <div class="vision-image fade-up">
-                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80" alt="Sustainable farming">
+                <div class="vision-image-wrapper fade-up">
+                    <div class="vision-accent top-right"></div>
+                    <div class="vision-accent bottom-left"></div>
+                    <div class="vision-image">
+                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800&q=80" alt="Lush green wheat field - sustainable agriculture">
+                    </div>
+                    <div class="vision-badge">
+                        <h4>95%</h4>
+                        <span>Less Water</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2282,117 +2546,6 @@
         </div>
     </section>
 
-    <!-- Team -->
-    <section class="team" id="team">
-        <div class="container">
-            <div class="section-header fade-up">
-                <h2>Meet our leadership</h2>
-                <a href="#" class="section-link">
-                    View full team
-                    <i data-lucide="arrow-right"></i>
-                </a>
-            </div>
-            
-            <!-- Desktop grid -->
-            <div class="team-grid">
-                <div class="team-member fade-up">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Richard Davies">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Richard Davies</h3>
-                        <span class="role">Founder & Managing Director</span>
-                        <p>20+ years in equine facility development across the GCC region.</p>
-                    </div>
-                </div>
-
-                <div class="team-member fade-up">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Sarah Al-Rashid">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Sarah Al-Rashid</h3>
-                        <span class="role">Director of Operations</span>
-                        <p>Agricultural engineer specializing in controlled environment systems.</p>
-                    </div>
-                </div>
-
-                <div class="team-member fade-up">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" alt="Dr. James Mitchell">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Dr. James Mitchell</h3>
-                        <span class="role">Head of Nutrition Science</span>
-                        <p>PhD in equine nutrition from RVC London. Published researcher.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mobile horizontal scroll -->
-            <div class="team-scroll">
-                <div class="team-member">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Richard Davies">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Richard Davies</h3>
-                        <span class="role">Founder & Managing Director</span>
-                        <p>20+ years in equine facility development across the GCC region.</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Sarah Al-Rashid">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Sarah Al-Rashid</h3>
-                        <span class="role">Director of Operations</span>
-                        <p>Agricultural engineer specializing in controlled environment systems.</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-member-image">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" alt="Dr. James Mitchell">
-                        <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                            <a href="#" aria-label="Email"><i data-lucide="mail"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-info">
-                        <h3>Dr. James Mitchell</h3>
-                        <span class="role">Head of Nutrition Science</span>
-                        <p>PhD in equine nutrition from RVC London. Published researcher.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="team-swipe-hint">
-                <span>Swipe to see more →</span>
-            </div>
-        </div>
-    </section>
 
     <!-- Work CTA -->
     <section class="work-cta" id="projects">
@@ -2437,14 +2590,18 @@
             <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80" alt="Future of farming">
         </div>
         <div class="container">
-            <div class="future-content fade-up">
-                <p class="eyebrow">The Future of Farming</p>
-                <h2>Agriculture is being reinvented. We're helping lead the way.</h2>
-                <p>By 2050, global food demand will increase by 70% while arable land continues to shrink. Controlled environment agriculture isn't an alternative — it's a necessity. Our work in equine nutrition is pioneering systems that will reshape how we think about sustainable food production across species and sectors.</p>
-                <a href="#contact" class="btn-primary">
-                    Partner With Us
-                    <i data-lucide="arrow-right"></i>
-                </a>
+            <div class="future-content-wrapper fade-up">
+                <div class="future-accent top-left"></div>
+                <div class="future-accent bottom-right"></div>
+                <div class="future-content">
+                    <p class="eyebrow">The Future of Farming</p>
+                    <h2>Agriculture is being reinvented. We're helping lead the way.</h2>
+                    <p>By 2050, global food demand will increase by 70% while arable land continues to shrink. Controlled environment agriculture isn't an alternative — it's a necessity. Our work in equine nutrition is pioneering systems that will reshape how we think about sustainable food production.</p>
+                    <a href="#contact" class="btn-primary">
+                        Partner With Us
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -2489,28 +2646,32 @@
                 </div>
                 <div class="contact-form fade-up">
                     <h3>Request a consultation</h3>
-                    <form>
+                    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p style="display:none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </p>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" placeholder="John">
+                                <input type="text" name="first-name" placeholder="John" required>
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Smith">
+                                <input type="text" name="last-name" placeholder="Smith" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" placeholder="john@company.com">
+                            <input type="email" name="email" placeholder="john@company.com" required>
                         </div>
                         <div class="form-group">
                             <label>Organization</label>
-                            <input type="text" placeholder="Company or facility name">
+                            <input type="text" name="organization" placeholder="Company or facility name">
                         </div>
                         <div class="form-group">
                             <label>Area of Interest</label>
-                            <select>
+                            <select name="interest">
                                 <option value="">Select a service</option>
                                 <option value="fodder">Fodder Systems</option>
                                 <option value="equipment">Facility Equipment</option>
@@ -2523,13 +2684,23 @@
                         </div>
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea placeholder="Tell us about your project or requirements..."></textarea>
+                            <textarea name="message" placeholder="Tell us about your project or requirements..."></textarea>
                         </div>
                         <button type="submit">
                             Send Request
                             <i data-lucide="send"></i>
                         </button>
                     </form>
+                    
+                    <!-- Success State -->
+                    <div class="form-success" id="formSuccess" style="display: none;">
+                        <div class="success-icon">
+                            <i data-lucide="check-circle"></i>
+                        </div>
+                        <h3>Thank you!</h3>
+                        <p>We've received your message and will get back to you within 24 hours.</p>
+                        <button type="button" onclick="resetForm()">Send another message</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2541,10 +2712,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <div class="logo-mark">
-                            <i data-lucide="leaf"></i>
-                        </div>
-                        RKD<span>BIO</span>
+                        <img src="/rkdlogo.png" alt="RKD Bio" class="footer-logo-img">
                     </div>
                     <p>Engineering the future of equine excellence through integrated solutions and sustainable innovation.</p>
                     <div class="footer-social">
@@ -2598,6 +2766,16 @@
     </a>
 
     <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                }, 1800);
+            }
+        });
+
         // Initialize Lucide icons (with error handling)
         try {
             if (typeof lucide !== 'undefined') {
@@ -2647,11 +2825,9 @@
 
         // Apply drag scroll to all horizontal scrollable elements
         const servicesCarousel = document.getElementById('servicesCarousel');
-        const teamScroll = document.querySelector('.team-scroll');
         const valuesScroll = document.querySelector('.values-scroll');
 
         enableDragScroll(servicesCarousel);
-        enableDragScroll(teamScroll);
         enableDragScroll(valuesScroll);
 
         // Services carousel scroll buttons
@@ -2741,12 +2917,46 @@
         // Video fallback
         const heroVideo = document.querySelector('.hero-video');
         const heroImage = document.querySelector('.hero-bg img');
+
+        // Form submission with success state
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
         
-        if (heroVideo) {
-            heroVideo.addEventListener('error', () => {
-                heroVideo.style.display = 'none';
-                if (heroImage) heroImage.style.display = 'block';
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                        // Re-init lucide icons for the success state
+                        if (typeof lucide !== 'undefined') {
+                            lucide.createIcons();
+                        }
+                    } else {
+                        alert('There was an error. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    alert('There was an error. Please try again.');
+                });
             });
+        }
+        
+        function resetForm() {
+            const contactForm = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            contactForm.reset();
+            contactForm.style.display = 'block';
+            formSuccess.style.display = 'none';
         }
     </script>
 
