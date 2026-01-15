@@ -356,10 +356,21 @@
         /* Hero */
         .hero {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding-top: 70px;
+                padding-bottom: 40px;
+            }
         }
 
         .hero-bg {
@@ -373,6 +384,12 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .hero-video {
+                opacity: 0.4;
+            }
         }
 
         .hero-bg img {
@@ -395,10 +412,27 @@
             );
         }
 
+        @media (max-width: 768px) {
+            .hero-bg::after {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(10, 10, 10, 0.5) 0%,
+                    rgba(10, 10, 10, 0.7) 50%,
+                    rgba(10, 10, 10, 1) 100%
+                );
+            }
+        }
+
         .hero-content {
             position: relative;
             z-index: 1;
             max-width: 900px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                max-width: 100%;
+            }
         }
 
         .hero-eyebrow {
@@ -417,6 +451,16 @@
             animation-delay: 0.2s;
         }
 
+        @media (max-width: 768px) {
+            .hero-eyebrow {
+                font-size: 0.75rem;
+                margin-bottom: 16px;
+            }
+            .hero-eyebrow::before {
+                width: 24px;
+            }
+        }
+
         .hero-eyebrow::before {
             content: '';
             width: 40px;
@@ -431,6 +475,14 @@
             animation-delay: 0.4s;
         }
 
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin-bottom: 20px;
+                line-height: 1.15;
+            }
+        }
+
         .hero p {
             font-size: 1.25rem;
             line-height: 1.8;
@@ -438,6 +490,14 @@
             opacity: 0;
             animation: fadeUp 0.8s ease forwards;
             animation-delay: 0.6s;
+        }
+
+        @media (max-width: 768px) {
+            .hero p {
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 32px;
+            }
         }
 
         .hero-ctas {
@@ -452,15 +512,13 @@
         @media (max-width: 640px) {
             .hero-ctas {
                 flex-direction: column;
-                gap: 16px;
+                gap: 12px;
             }
             .hero-ctas .btn-primary,
             .hero-ctas .btn-secondary {
                 width: 100%;
                 justify-content: center;
-            }
-            .hero p {
-                font-size: 1.1rem;
+                padding: 14px 28px;
             }
         }
 
@@ -541,49 +599,6 @@
         @keyframes scrollPulse {
             0%, 100% { opacity: 1; transform: scaleY(1); }
             50% { opacity: 0.5; transform: scaleY(0.8); }
-        }
-
-        /* Client Logos */
-        .clients {
-            padding: 80px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .clients-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .clients-header p {
-            font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            max-width: none;
-        }
-
-        .clients-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 64px;
-            flex-wrap: wrap;
-        }
-
-        .client-logo {
-            opacity: 0.4;
-            transition: opacity var(--transition-medium);
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            color: var(--color-text);
-        }
-
-        .client-logo:hover {
-            opacity: 0.8;
         }
 
         /* Statement Section */
@@ -1576,71 +1591,6 @@
             transform: translateX(4px);
         }
 
-        /* Testimonial */
-        .testimonial {
-            background: var(--color-bg);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .testimonial-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .testimonial-quote {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--color-text);
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .testimonial-quote::before {
-            content: '"';
-            font-family: var(--font-display);
-            font-size: 6rem;
-            color: var(--color-accent);
-            opacity: 0.3;
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .testimonial-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .testimonial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .testimonial-info h4 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .testimonial-info p {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-        }
-
         /* Future */
         .future {
             position: relative;
@@ -2270,22 +2220,6 @@
         </div>
     </section>
 
-    <!-- Client Logos -->
-    <section class="clients">
-        <div class="container">
-            <div class="clients-header fade-up">
-                <p>Trusted by Leading Equestrian Organizations</p>
-            </div>
-            <div class="clients-grid fade-up">
-                <div class="client-logo">ROYAL STABLES</div>
-                <div class="client-logo">AL SHAQAB</div>
-                <div class="client-logo">MEYDAN</div>
-                <div class="client-logo">DIRIYAH GATE</div>
-                <div class="client-logo">NEOM</div>
-            </div>
-        </div>
-    </section>
-
     <!-- Statement -->
     <section class="statement">
         <div class="container">
@@ -2561,24 +2495,6 @@
                         Get in touch
                         <i data-lucide="arrow-right"></i>
                     </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonial -->
-    <section class="testimonial">
-        <div class="container">
-            <div class="testimonial-content fade-up">
-                <p class="testimonial-quote">RKD Bio transformed our approach to equine nutrition. The fodder system has reduced our water consumption by 90% while our horses have never been healthier. Their team's expertise and commitment to our success has been exceptional.</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Client">
-                    </div>
-                    <div class="testimonial-info">
-                        <h4>Sheikh Mohammed Al-Fahad</h4>
-                        <p>Director, Royal Equestrian Club Dubai</p>
-                    </div>
                 </div>
             </div>
         </div>
